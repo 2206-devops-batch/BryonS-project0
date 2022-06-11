@@ -7,15 +7,15 @@ import os
 
 
 # Get Github Login credentials
-def get(): 
+def credentials(): 
     USER = os.getenv('USER')
-    PW = os.getenv('PW')
+    TOKEN = os.getenv('TOKEN')
 
     # logic
     if not USER:
         USER = input("What is your Github user name? ")
 
-    if not PW:
-        PW = getpass.getpass('What is your Github password? ')
-    return (USER, PW)
+    if not TOKEN:
+        TOKEN = getpass.getpass('Please copy and paste your Github Token: ')
+    return (USER, TOKEN)
 

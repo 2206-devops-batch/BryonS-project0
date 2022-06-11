@@ -1,41 +1,38 @@
-# import requests
-from urllib.error import HTTPError
-import urllib.request
-import json
+from lib import github_cred as github
+from lib import snapshot
+from lib import fetch_github_repo
 
-from lib import github_cred as gh
-from lib import snapshot as sn
+import pathlib, json
 
-# Check for directory and database file
-sn.getSnapshotData()
-
-
-# # Github Login Credentials
-# USER, PW = gh.get()
-# # for testing
-# print(USER)
-# print(PW)
+# # Check for directory and database file
+# db = snapshot.database()
+# print(db)
 
 
+# Github Login Credentials
+USER, TOKEN = github.credentials()
+# Github Repo
+data = fetch_github_repo.get(USER, TOKEN)
+# save file to disk
+pathlib.Path.cwd().joinpath('avoid', 'db.json').write_text(json.dumps(data, indent=4))
 
 
-# # Github auth
-# URL = "https://api.github.com/user/repos -q"
-# try:
-#     response = urllib.request.urlopen('https://google.com')
-#     response_status = response.status
-#     response_headers = response.getheaders()
-# except HTTPError as error:
-#     response_status = error.code
+# Temp function to read file from disc for testing.
+def readFiles():
+    # read headers
+    json_headers = pathlib.Path.cwd().joinpath('avoid', 'headers.json').read_text()
+    headers = json.loads(json_headers)
+    print(headers)
+    # read db
+    json_data = pathlib.Path.cwd().joinpath('avoid', 'db.json').read_text()
+    data = json.loads(json_data)
+    print(len(data))
+
+readFiles()
+# will be removed!!!!!!!!!
 
 
-# # print(response_status)
-# print(json.dumps(response_headers, indent=4))
-
-
-# with urllib.request.urlopen('https://google.com') as f:
-#     print(f)
-#     print(f.read(300).decode('utf-8'))
-
-
+# check for updated repos
+# download updated repos
+# save new db file with updated repo items.
 
