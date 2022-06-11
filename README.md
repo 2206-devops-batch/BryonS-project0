@@ -18,7 +18,7 @@
   - python3 -m pip install python-dotenv
 - Create .env file in root directory
   - USER=your_github_username
-  - TOKEN=your_github_password
+  - TOKEN=your_github_token
     - The token can be created from: Settings / Developer Settings / Personal access tokens
 - Run: 'python main.py' from the terminal
 
