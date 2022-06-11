@@ -1,5 +1,28 @@
 # BryonS-project0
 
-## Revature DevOps Project0 -Python Application 6-10-2022
+**Revature DevOps Project0 -Python Application 6-10-2022**
 
-### Instructor Nick E.
+**Instructor Nick E.**
+
+## GitHub Snapshot
+
+### Dependencies
+
+- python-dotenv 0.20.0
+<!-- - requests 2.28.0 -->
+
+### Instructions
+
+- Install dependencies
+  - python3 -m pip install python-dotenv
+- Create .env file in root directory
+  - USER=github_user_name
+  - PW=your_github_password
+- Run: 'python main.py' from the terminal
+
+### Purpose
+
+Create a backup of all your Github repositories. Compare changed repositories with a database of last snapshot data and only download changed or new repositories.
+
+1. First time run -get all repositories.
+2. Second time run -only get changed or new repositories.
