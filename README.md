@@ -13,11 +13,13 @@
 
 ### Instructions
 
+- Clone repository
 - Install dependencies
   - python3 -m pip install python-dotenv
 - Create .env file in root directory
-  - USER=github_user_name
-  - PW=your_github_password
+  - USER=your_github_username
+  - TOKEN=your_github_password
+    - The token can be created from: Settings / Developer Settings / Personal access tokens
 - Run: 'python main.py' from the terminal
 
 ### Purpose
