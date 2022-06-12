@@ -33,10 +33,10 @@ Create a backup of all your Github repositories. Compare changed repositories wi
 
 <img src="images/start.jpg" alt="start logic to create the directory and database files" width="400px">
 
-### Auth logic to get GitHub username and token
+### Auth logic for GitHub username and token
 
-<img src="images/auth.jpg" alt="Auth logic to get GitHub username and token" width="100%">
+<img src="images/auth.jpg" alt="Auth logic for GitHub username and token" width="100%">
 
-### Download logic to get new or changed repositories
+### Download logic for new or changed repositories
 
-<img src="images/download.jpg" alt="Download logic to get new or changed repositories" width="100%">
+<img src="images/download.jpg" alt="Download logic for new or changed repositories" width="100%">
