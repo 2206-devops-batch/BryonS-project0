@@ -35,8 +35,8 @@ Create a backup of all your Github repositories. Compare changed repositories wi
 
 ### Auth logic to get GitHub username and token
 
-<img src="images/auth.jpg" alt="Auth logic to get GitHub username and token" width="600px">
+<img src="images/auth.jpg" alt="Auth logic to get GitHub username and token" width="800px">
 
 ### Download logic to get new or changed repositories
 
-<img src="images/download.jpg" alt="Download logic to get new or changed repositories" width="600px">
+<img src="images/download.jpg" alt="Download logic to get new or changed repositories" width="800px">
