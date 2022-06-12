@@ -28,3 +28,5 @@ Create a backup of all your Github repositories. Compare changed repositories wi
 
 1. First time run -get all repositories.
 2. Second time run -only get changed or new repositories.
+
+![Start Logic Flow](images/start.jpg =250x250)
