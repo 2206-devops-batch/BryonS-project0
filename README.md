@@ -39,4 +39,4 @@ Create a backup of all your Github repositories. Compare changed repositories wi
 
 ### Download logic to get new or changed repositories
 
-<img src="images/auth.jpg" alt="Download logic to get new or changed repositories" width="600px">
+<img src="images/download.jpg" alt="Download logic to get new or changed repositories" width="600px">
