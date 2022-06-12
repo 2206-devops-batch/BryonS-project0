@@ -15,7 +15,7 @@
 
 - Clone repository
 - Install dependencies
-  - python3 -m pip install python-dotenv
+  - python3 -m pip3 install python-dotenv requests
 - Create .env file in root directory
   - USER=your_github_username
   - TOKEN=your_github_token
