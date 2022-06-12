@@ -29,4 +29,4 @@ Create a backup of all your Github repositories. Compare changed repositories wi
 1. First time run -get all repositories.
 2. Second time run -only get changed or new repositories.
 
-<img src="images/start.jpg" alt="start logic to create the directory and database files">
+<img src="images/start.jpg" alt="start logic to create the directory and database files" width="600px">
