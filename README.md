@@ -29,14 +29,14 @@ Create a backup of all your Github repositories. Compare changed repositories wi
 1. First time run -get all repositories.
 2. Second time run -only get changed or new repositories.
 
-### Start logic to create the directory and database files
+### Start logic to create the directory and database file
 
 <img src="images/start.jpg" alt="start logic to create the directory and database files" width="400px">
 
 ### Auth logic to get GitHub username and token
 
-<img src="images/auth.jpg" alt="Auth logic to get GitHub username and token" width="800px">
+<img src="images/auth.jpg" alt="Auth logic to get GitHub username and token" width="100%">
 
 ### Download logic to get new or changed repositories
 
-<img src="images/download.jpg" alt="Download logic to get new or changed repositories" width="800px">
+<img src="images/download.jpg" alt="Download logic to get new or changed repositories" width="100%">
