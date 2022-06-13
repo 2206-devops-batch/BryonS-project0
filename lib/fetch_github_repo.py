@@ -86,7 +86,10 @@ def get(user, token, db):
     if download or remove_list:
         # ask to remove old repos?
         if remove_list:
-            remove_files = input('Would you like to remove old repo files? (y/n)')
+            for f in remove_list:
+                file_name = f"{d['name']}_{str(d['updated_at'])}.zip"
+                print(file_name)
+            remove_files = input('Would you like to remove these old repo files? (y/n)')
             if remove_files:
                 for d in remove_list:
                     file_name = f"{d['name']}_{str(d['updated_at'])}.zip"
