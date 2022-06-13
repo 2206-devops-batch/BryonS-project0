@@ -60,7 +60,7 @@ def downloadRepo(user, name, token, default_branch, write_path):
     # print(res.status_code)
     # h = res.headers
     # print(h)
-    with open(f'{write_path}/{name}.zip', 'wb') as b:
+    with open(write_path, 'wb') as b:
         b.write(res.content)
 
 
@@ -83,7 +83,7 @@ def get(user, token, db):
     db_data = filterData(data)
     download, remove_list = processLinks(db, db_data)
 
-    if download or remove_files:
+    if download or remove_list:
         # ask to remove old repos?
         if remove_list:
             remove_files = input('Would you like to remove old repo files? (y/n)')
@@ -100,8 +100,9 @@ def get(user, token, db):
             for d in download:
                 file_name = f"{d['name']}_{str(d['updated_at'])}.zip"
                 f_path = SNAPSHOT_DIR.joinpath(file_name)
-                # print(f_path)
-                # downloadRepo(user, d['name'], token, d['default_branch'], f_path)
+                print(f'Downloading: {file_name}')
+                downloadRepo(user, d['name'], token, d['default_branch'], f_path)
+            print('Finished!')
     else:
         print('No changes in all repositories. Have a great day!')
 
