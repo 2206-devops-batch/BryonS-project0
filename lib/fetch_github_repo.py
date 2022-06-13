@@ -89,7 +89,7 @@ def get(user, token, db):
             for d in remove_list:
                 file_name = f"- {d['name']}_{str(d['pushed_at'])}.zip"
                 print(file_name)
-            remove_files = input('Would you like to remove these old repo files? (y/n)')
+            remove_files = input('Would you like to remove these old repo files? (y/n) ')
             if remove_files == 'y' or remove_files == 'yes':
                 for d in remove_list:
                     file_name = f"{d['name']}_{str(d['pushed_at'])}.zip"
