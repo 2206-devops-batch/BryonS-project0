@@ -106,7 +106,7 @@ def get(user, token, db):
                 f_path = SNAPSHOT_DIR.joinpath(file_name)
                 print(f'Downloading: {file_name}')
                 downloadRepo(user, d['name'], token, d['default_branch'], f_path)
-            print('Finished!')
+            print('Finished Downloading!')
     else:
         print('No changes in all repositories. Have a great day!')
 
