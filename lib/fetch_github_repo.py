@@ -92,6 +92,7 @@ def get(user, token, db):
                     file_name = f"{d['name']}_{str(d['updated_at'])}.zip"
                     try:
                         SNAPSHOT_DIR.joinpath(file_name).unlink()
+                        print(f'Removed {file_name}')
                     except:
                         print(f"Couldn't delete file {file_name}" )
         
