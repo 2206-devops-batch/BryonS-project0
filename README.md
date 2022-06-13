@@ -1,7 +1,6 @@
 # BryonS-project0
 
-**Revature DevOps Project0 -Python Application 6-10-2022**
-
+**Revature DevOps Project0 -Python Application 2206-devops-batch**
 **Instructor Nick E.**
 
 ## GitHub Snapshot
