@@ -4,17 +4,20 @@ from lib import fetch_github_repo
 
 import pathlib, json
 
-# # Check for directory and database file
-# db = snapshot.database()
-# print(db)
+# Check for directory and database file
+db = snapshot.get_database()
 
 
 # Github Login Credentials
 USER, TOKEN = github.credentials()
 # Github Repo
-data = fetch_github_repo.get(USER, TOKEN)
-# save file to disk
-pathlib.Path.cwd().joinpath('avoid', 'db.json').write_text(json.dumps(data, indent=4))
+data = fetch_github_repo.get(USER, TOKEN, db)
+
+print('Done!')
+
+# temp code. save file to disk
+# pathlib.Path.cwd().joinpath('avoid', 'db.json').write_text(json.dumps(data, indent=4))
+# pathlib.Path.cwd().joinpath('avoid', 'file.zip').write_text(json.dumps(data))
 
 
 # Temp function to read file from disc for testing.
@@ -28,7 +31,7 @@ def readFiles():
     data = json.loads(json_data)
     print(len(data))
 
-readFiles()
+# readFiles()
 # will be removed!!!!!!!!!
 
 
