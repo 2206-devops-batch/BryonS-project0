@@ -7,7 +7,6 @@ import pathlib, json
 # Check for directory and database file
 db = snapshot.get_database()
 
-
 # Github Login Credentials
 USER, TOKEN = github.credentials()
 # Github Repo

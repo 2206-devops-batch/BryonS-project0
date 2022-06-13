@@ -21,33 +21,33 @@ def processLinks(db, data):
     new_database = []
     download = []
     remove_list = []
-    for new_data in data: #loop downloaded data
-        # no matter what add repo to new_database
-        new_database.append(new_data)
-        is_new_repo = True
-        for old_data in db:
-            is_new_repo = True
-            if new_data['name'] == old_data['name']:
-                is_new_repo = False
-                break
+    
+    # get list of names
+    names_list = []
+    for d in db:
+        names_list.append(d['name'])
 
-        for old_data in db: # loop database data
-            # new repo name in database?
-            if new_data['name'] == old_data['name']:
-                # exact match?
-                if new_data == old_data:
-                    # do nothing, repo downloaded and new_data already in new_database
-                    continue
-                # was not an exact match
-                else:
-                    remove_list.append(old_data)
-                    download.append(new_data)
-            
-            if is_new_repo:
-                download.append(new_data)
+    for new_data in data: #loop downloaded data
+        # check if repo name is in database.
+        if new_data['name'] not in names_list:
+            download.append(new_data)
+            new_database.append(new_data)
+        else:
+            # no matter what add repo to new_database
+            new_database.append(new_data)
+            for old_data in db: # loop database data
+                # find database repo and compare
+                if new_data['name'] == old_data['name']:
+                    # exact match?
+                    if new_data == old_data:
+                        # do nothing, repo downloaded and new_data already in new_database
+                        continue
+                    # was not an exact match
+                    else:
+                        remove_list.append(old_data)
+                        download.append(new_data)
 
     print(f'You have {len(new_database)} repositories.')
-    print(len(download))
     SNAPSHOT_DIR.joinpath('github_data.json').write_text(json.dumps(new_database))
     return (download, remove_list)
 
@@ -83,18 +83,26 @@ def get(user, token, db):
     db_data = filterData(data)
     download, remove_list = processLinks(db, db_data)
 
-    # ask to remove old repos?
-    if remove_list:
-        remove_files = input('Would you like to remove old repo files? (y/n)')
-        if remove_files:
-            for file in remove_list:
-                SNAPSHOT_DIR.joinpath(file).unlink()
-    
-    if download:
-        print('Starting Download')
-        for d in download:
-            f_path = SNAPSHOT_DIR.joinpath(d['name']+ str(d['updated_at']+'.zip'))
-            print(f_path)
-            # downloadRepo(user, d['name'], token, d['default_branch'], f_path)
+    if download or remove_files:
+        # ask to remove old repos?
+        if remove_list:
+            remove_files = input('Would you like to remove old repo files? (y/n)')
+            if remove_files:
+                for d in remove_list:
+                    file_name = f"{d['name']}_{str(d['updated_at'])}.zip"
+                    try:
+                        SNAPSHOT_DIR.joinpath(file_name).unlink()
+                    except:
+                        print(f"Couldn't delete file {file_name}" )
+        
+        if download:
+            print('Starting Download')
+            for d in download:
+                file_name = f"{d['name']}_{str(d['updated_at'])}.zip"
+                f_path = SNAPSHOT_DIR.joinpath(file_name)
+                # print(f_path)
+                # downloadRepo(user, d['name'], token, d['default_branch'], f_path)
+    else:
+        print('No changes in all repositories. Have a great day!')
 
-    return {} 
+    return

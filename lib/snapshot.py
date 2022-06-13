@@ -13,7 +13,7 @@ def createSnapshotData(data):
 def readFile(path):
     try:
         with open(path) as f:
-           return json.loads(f)
+           return json.load(f)
     except:
         return []
 
