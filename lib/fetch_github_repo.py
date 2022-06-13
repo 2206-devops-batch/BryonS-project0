@@ -87,12 +87,12 @@ def get(user, token, db):
         # ask to remove old repos?
         if remove_list:
             for d in remove_list:
-                file_name = f"{d['name']}_{str(d['updated_at'])}.zip"
+                file_name = f"- {d['name']}_{str(d['pushed_at'])}.zip"
                 print(file_name)
             remove_files = input('Would you like to remove these old repo files? (y/n)')
             if remove_files:
                 for d in remove_list:
-                    file_name = f"{d['name']}_{str(d['updated_at'])}.zip"
+                    file_name = f"{d['name']}_{str(d['pushed_at'])}.zip"
                     try:
                         SNAPSHOT_DIR.joinpath(file_name).unlink()
                         print(f'Removed {file_name}')
@@ -102,7 +102,7 @@ def get(user, token, db):
         if download:
             print('Starting Download')
             for d in download:
-                file_name = f"{d['name']}_{str(d['updated_at'])}.zip"
+                file_name = f"{d['name']}_{str(d['pushed_at'])}.zip"
                 f_path = SNAPSHOT_DIR.joinpath(file_name)
                 print(f'Downloading: {file_name}')
                 downloadRepo(user, d['name'], token, d['default_branch'], f_path)
