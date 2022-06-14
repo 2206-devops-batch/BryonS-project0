@@ -23,9 +23,7 @@ def processLinks(db, data):
     remove_list = []
     
     # get list of names
-    names_list = []
-    for d in db:
-        names_list.append(d['name'])
+    names_list = [x['name'] for x in db]
 
     for new_data in data: #loop downloaded data
         # check if repo name is in database.
