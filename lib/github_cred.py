@@ -17,5 +17,5 @@ def credentials():
 
     if not TOKEN:
         TOKEN = getpass.getpass('Please copy and paste your Github Token: ')
-    return (USER, TOKEN)
+    return (USER.strip(), TOKEN.strip())
 

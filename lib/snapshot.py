@@ -1,28 +1,23 @@
-import pathlib
-import json
-
-root_path = pathlib.Path.cwd()
-snapshot_dir_path = root_path.joinpath('snapshot')
-snapshot_file_path = snapshot_dir_path.joinpath('github_data.json')
-
-def createSnapshotData(data):
-    with open(snapshot_file_path, 'w') as f:
-        json.dumps(data, f)
+import pathlib, json
 
 
-def readFile(path):
-    try:
-        with open(path) as f:
-           return json.load(f)
-    except:
-        return []
+SNAPSHOT_DIR =  pathlib.Path.cwd().joinpath('snapshot')
+GITHUB_DB_FILE_PATH = SNAPSHOT_DIR.joinpath('github_data.json')
+
+# if file does not exist, create it.
+def read_file(path):
+        if not path.exists():
+            return []
+        else:
+            with open(path) as f:
+                return json.load(f)
 
 
 # load github db info or create if not exist.
 def get_database():
     #check if directory exist
-    if not snapshot_dir_path.exists():
-        print('Created GitHub backup directory: ' + str(snapshot_dir_path))
-        snapshot_dir_path.mkdir()
+    if not SNAPSHOT_DIR.exists():
+        print('Created GitHub backup directory: ' + str(SNAPSHOT_DIR))
+        SNAPSHOT_DIR.mkdir()
     
-    return readFile(snapshot_file_path)
+    return read_file(GITHUB_DB_FILE_PATH)
