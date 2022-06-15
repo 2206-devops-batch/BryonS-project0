@@ -12,14 +12,13 @@ class Test_Snapshot(unittest.TestCase):
     # setup once before running test.
     @classmethod
     def setUpClass(cls):
+        # load unit test db test files and add them as class attributes.
         unit_test_dir = pathlib.Path.cwd().joinpath('unit_test')
-        db_file = unit_test_dir.joinpath('dummy_data1.json')
-        data_file = unit_test_dir.joinpath('dummy_data2.json')
-        db_json = db_file.read_bytes()
-        data_json = data_file.read_bytes()
         # set as a class attribute
-        cls.db = json.loads(db_json)
-        cls.data = json.loads(data_json)
+        with open(unit_test_dir.joinpath('dummy_data1.json')) as f1:
+            cls.db = json.load(f1)
+        with open( unit_test_dir.joinpath('dummy_data2.json')) as f2:
+            cls.data = json.load(f2)
 
         
     
@@ -27,6 +26,9 @@ class Test_Snapshot(unittest.TestCase):
         self.assertEqual(create_file_name("Bob", 1234567890), "Bob_1234567890.zip")
         self.assertEqual(create_file_name(" Bob ", " 1234567890 "), "Bob_1234567890.zip")
         self.assertEqual(create_file_name("Bob ", 1234567890.009), "Bob_1234567890.009.zip")
+        print(self.db)
+        print('\n')
+        print(self.data)
 
 
 
