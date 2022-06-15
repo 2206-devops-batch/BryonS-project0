@@ -1,4 +1,4 @@
-import requests, json 
+import requests, json, pathlib 
 from datetime import datetime
 from lib.snapshot import SNAPSHOT_DIR, GITHUB_DB_FILE_PATH
 
@@ -10,7 +10,8 @@ def filter_data(data):
             "name": d['name'], # name of repo
             "default_branch": d['default_branch'], # master, main ..
             "updated_at": datetime.strptime(d['updated_at'], "%Y-%m-%dT%H:%M:%SZ").timestamp(),
-            "pushed_at": datetime.strptime(d['pushed_at'], "%Y-%m-%dT%H:%M:%SZ").timestamp()
+            "pushed_at": datetime.strptime(d['pushed_at'], "%Y-%m-%dT%H:%M:%SZ").timestamp(),
+            "owner": d.get('owner').get('login')
         }
         db.append(obj)
     return db
@@ -50,8 +51,8 @@ def process_links(db, data):
 
 
 
-def download_repo(user, name, token, default_branch, write_path):
-    URL = f'https://github.com/{user}/{name}/archive/refs/heads/{default_branch}.zip'
+def download_repo(owner, user, name, token, default_branch, write_path):
+    URL = f'https://github.com/{owner}/{name}/archive/refs/heads/{default_branch}.zip'
     headers = {'Accept': 'application/vnd.github.v3+json'}
     res = requests.get(URL, auth=(user, token), headers = headers)
     with open(write_path, 'wb') as b:
@@ -90,6 +91,8 @@ def get_repositories(user, token, db):
 
     data = res.json()
 
+    pathlib.Path.cwd().joinpath('avoid', 'db.json')
+
     # extract needed repo: name, updated_at, pushed_at, default_branch from GitHub response
     db_data = filter_data(data)
     download, remove_list = process_links(db, db_data)
@@ -105,7 +108,7 @@ def get_repositories(user, token, db):
                 file_name = create_file_name(d['name'], d['pushed_at'])
                 f_path = SNAPSHOT_DIR.joinpath(file_name)
                 print(f'Downloading: {file_name}')
-                download_repo(user, d['name'], token, d['default_branch'], f_path)
+                download_repo(d.get('owner'), user, d['name'], token, d['default_branch'], f_path)
             print('Finished Downloading!')
     else:
         print('No changes in all repositories. Have a great day!')
