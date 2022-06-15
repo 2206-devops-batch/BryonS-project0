@@ -62,7 +62,7 @@ def create_file_name(name, pushed_at):
 
 def remove_files(remove_list):
     for d in remove_list:
-        print(create_file_name(d['name'], d['pushed_at']))
+        print(f"\t\t\t\t\t-{create_file_name(d['name'], d['pushed_at'])}")
     remove_old_files = input('Would you like to remove these old repo files? (y/n) ')
     if remove_old_files == 'y' or remove_old_files == 'yes':
         for d in remove_list:
