@@ -20,8 +20,6 @@ class Test_Snapshot(unittest.TestCase):
         with open( unit_test_dir.joinpath('dummy_data2.json')) as f2:
             cls.data = json.load(f2)
 
-        
-    
     def test_create_file_name(self):
         self.assertEqual(create_file_name("Bob", 1234567890), "Bob_1234567890.zip")
         self.assertEqual(create_file_name(" Bob ", " 1234567890 "), "Bob_1234567890.zip")
