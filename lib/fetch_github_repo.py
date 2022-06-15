@@ -1,6 +1,6 @@
 import requests, json 
 from datetime import datetime
-from lib import snapshot
+from lib.snapshot import SNAPSHOT_DIR, GITHUB_DB_FILE_PATH
 
 
 def filter_data(data):
@@ -45,7 +45,7 @@ def process_links(db, data):
                         download.append(new_data)
 
     print(f'You have {len(new_database)} repositories.')
-    snapshot.GITHUB_DB_FILE_PATH.write_text(json.dumps(new_database))
+    GITHUB_DB_FILE_PATH.write_text(json.dumps(new_database))
     return (download, remove_list)
 
 
@@ -68,7 +68,7 @@ def remove_files(remove_list):
         for d in remove_list:
             file_name = create_file_name(d['name'], d['pushed_at'])
             try:
-                snapshot.SNAPSHOT_DIR.joinpath(file_name).unlink()
+                SNAPSHOT_DIR.joinpath(file_name).unlink()
                 print(f'Removed {file_name}')
             except:
                 print(f"Couldn't delete file {file_name}" )
@@ -100,7 +100,7 @@ def get_repositories(user, token, db):
             print('Starting Download')
             for d in download:
                 file_name = create_file_name(d['name'], d['pushed_at'])
-                f_path = snapshot.SNAPSHOT_DIR.joinpath(file_name)
+                f_path = SNAPSHOT_DIR.joinpath(file_name)
                 print(f'Downloading: {file_name}')
                 download_repo(user, d['name'], token, d['default_branch'], f_path)
             print('Finished Downloading!')
