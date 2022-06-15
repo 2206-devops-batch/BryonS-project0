@@ -58,13 +58,14 @@ def download_repo(user, name, token, default_branch, write_path):
         b.write(res.content)
 
 def create_file_name(name, pushed_at):
-     return f"{name}_{str(pushed_at)}.zip"
+     return f"{str(name).strip()}_{str(pushed_at).strip()}.zip"
 
 def remove_files(remove_list):
     print('\n')
     for d in remove_list:
         print(f"\t-- {create_file_name(d['name'], d['pushed_at'])}")
     remove_old_files = input('You have newer files in the repo. Would you like to remove the old repo files? (y/n) ')
+
     if remove_old_files == 'y' or remove_old_files == 'yes':
         for d in remove_list:
             file_name = create_file_name(d['name'], d['pushed_at'])

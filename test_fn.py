@@ -4,27 +4,31 @@ import unittest
 # from unittest import mock
 # from unittest.mock import patch
 
-from lib import fetch_github_repo
+from lib.fetch_github_repo import create_file_name
 from lib import github_cred
-from lib import snapshot
+from lib.snapshot import GITHUB_DB_FILE_PATH, SNAPSHOT_DIR
 
-# unit_test_dir = pathlib.Path.cwd().joinpath('unit_test')
-# db_file = unit_test_dir.joinpath('dummy_data1.json')
-# data_file = unit_test_dir.joinpath('dummy_data2.json')
+class Test_Snapshot(unittest.TestCase):
+    # setup once before running test.
+    @classmethod
+    def setUpClass(cls):
+        unit_test_dir = pathlib.Path.cwd().joinpath('unit_test')
+        db_file = unit_test_dir.joinpath('dummy_data1.json')
+        data_file = unit_test_dir.joinpath('dummy_data2.json')
+        db_json = db_file.read_bytes()
+        data_json = data_file.read_bytes()
+        # set as a class attribute
+        cls.db = json.loads(db_json)
+        cls.data = json.loads(data_json)
 
-# db_json = db_file.read_bytes()
-# data_json = data_file.read_bytes()
+        
+    
+    def test_create_file_name(self):
+        self.assertEqual(create_file_name("Bob", 1234567890), "Bob_1234567890.zip")
+        self.assertEqual(create_file_name(" Bob ", " 1234567890 "), "Bob_1234567890.zip")
+        self.assertEqual(create_file_name("Bob ", 1234567890.009), "Bob_1234567890.009.zip")
 
-# db = json.loads(db_json)
-# data = json.loads(data_json)
 
 
-class TestCalc(unittest.TestCase):
-    print(snapshot.snapshot_file)
-  
-    # def test_read_file(self):
-    #     file_path = pathlib.Path.cwd().joinpath('unit_test', 'dummy_data1.json')
-    #     result = snapshot.read_file()
-    #     print(result)
-    #     self.assertEqual(result, ('Bob', 'tuesdaymondayfriday454__34343'))
-
+if __name__ == '__main__':
+    unittest.main()
