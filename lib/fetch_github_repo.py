@@ -61,8 +61,9 @@ def create_file_name(name, pushed_at):
      return f"{name}_{str(pushed_at)}.zip"
 
 def remove_files(remove_list):
+    print('\n')
     for d in remove_list:
-        print(f"\t\t\t\t\t-{create_file_name(d['name'], d['pushed_at'])}")
+        print(f"\t\t-- {create_file_name(d['name'], d['pushed_at'])}")
     remove_old_files = input('Would you like to remove these old repo files? (y/n) ')
     if remove_old_files == 'y' or remove_old_files == 'yes':
         for d in remove_list:
@@ -72,6 +73,7 @@ def remove_files(remove_list):
                 print(f'Removed {file_name}')
             except:
                 print(f"Couldn't delete file {file_name}" )
+        print('\n')
 
 # main entry point
 def get_repositories(user, token, db):
