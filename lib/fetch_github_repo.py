@@ -1,6 +1,6 @@
 import requests, json, pathlib 
 from datetime import datetime
-from lib.snapshot import SNAPSHOT_DIR, GITHUB_DB_FILE_PATH
+from lib.snapshot import DIR, GITHUB_DB_FILE_PATH
 
 
 def filter_data(data):
@@ -18,7 +18,7 @@ def filter_data(data):
 
 
 # both args are list of dicts. Keys: name, default_branch, updated_at, pushed_at
-def process_links(db, data):
+def process_links(db, data, FILE_WRITE_PATH):
     new_database = []
     download = []
     remove_list = []
@@ -46,7 +46,7 @@ def process_links(db, data):
                         download.append(new_data)
 
     print(f'You have {len(new_database)} repositories.')
-    GITHUB_DB_FILE_PATH.write_text(json.dumps(new_database))
+    FILE_WRITE_PATH.write_text(json.dumps(new_database))
     return (download, remove_list)
 
 
@@ -71,7 +71,7 @@ def remove_files(remove_list):
         for d in remove_list:
             file_name = create_file_name(d['name'], d['pushed_at'])
             try:
-                SNAPSHOT_DIR.joinpath(file_name).unlink()
+                DIR.joinpath(file_name).unlink()
                 print(f'Removed {file_name}')
             except:
                 print(f"Couldn't delete file {file_name}" )
@@ -95,7 +95,7 @@ def get_repositories(user, token, db):
 
     # extract needed repo: name, updated_at, pushed_at, default_branch from GitHub response
     db_data = filter_data(data)
-    download, remove_list = process_links(db, db_data)
+    download, remove_list = process_links(db, db_data, GITHUB_DB_FILE_PATH)
 
     if download or remove_list:
         # ask to remove old repos?
@@ -106,7 +106,7 @@ def get_repositories(user, token, db):
             print('Starting Download')
             for d in download:
                 file_name = create_file_name(d['name'], d['pushed_at'])
-                f_path = SNAPSHOT_DIR.joinpath(file_name)
+                f_path = DIR.joinpath(file_name)
                 print(f'Downloading: {file_name}')
                 download_repo(d.get('owner'), user, d['name'], token, d['default_branch'], f_path)
             print('Finished Downloading!')

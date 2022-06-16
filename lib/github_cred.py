@@ -4,12 +4,12 @@ import getpass
 import os
 
 
-
-
 # Get Github Login credentials
-def credentials(): 
-    USER = os.getenv('USER')
-    TOKEN = os.getenv('TOKEN')
+def credentials(USER='', TOKEN=''):
+    # if unittest does not pass in test data, get real data.
+    if not USER and not TOKEN:
+        USER = os.getenv('USER')
+        TOKEN = os.getenv('TOKEN')
 
     # logic
     if not USER:
