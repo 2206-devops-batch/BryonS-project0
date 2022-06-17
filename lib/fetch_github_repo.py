@@ -67,10 +67,10 @@ def remove_files(PATH, remove_list):
             try:
                 PATH.joinpath(file_name).unlink()
                 print(f'Removed {file_name}')
-                return True
             except:
                 print(f"Couldn't delete file {file_name}")
                 return False
+        return True
 
 # main entry point
 def get_repositories(user, token, db):
@@ -101,7 +101,7 @@ def get_repositories(user, token, db):
 
             remove_old_files = input('You have newer files in the repo. Would you like to remove the old repo files? (y/n) ')
             if remove_old_files == 'y' or remove_old_files == 'yes':
-                remove_files(DIR, remove_list, remove_old_files)
+                remove_files(DIR, remove_list)
 
         
         if download:
