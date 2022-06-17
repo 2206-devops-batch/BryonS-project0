@@ -1,3 +1,5 @@
+#!/c/Python310/python
+
 from lib import github_cred as github
 from lib import snapshot
 from lib import fetch_github_repo

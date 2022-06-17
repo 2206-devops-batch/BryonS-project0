@@ -1,3 +1,5 @@
+#!/c/Python310/python
+
 import pathlib, json
 import unittest
 import os, sys
@@ -77,8 +79,7 @@ class TestFetchGitHub(unittest.TestCase):
         TEST_STRING = f"{self.USER}DummyFile_65923450394.zip"
         self.assertEqual(create_file_name(f"{self.USER}DummyFile", 65923450394), TEST_STRING)
         self.assertEqual(create_file_name(f" {self.USER}DummyFile ", ' 65923450394 '), TEST_STRING)
-        
-    
+
     def test_remove_files(self):
         # create dummy file to be removed.
         TEMP_FILE_NAME = create_file_name('BryonS-project0', 1655089511.0)
