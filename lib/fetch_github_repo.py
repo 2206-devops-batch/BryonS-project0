@@ -99,7 +99,7 @@ def get_repositories(user, token, db):
             for d in remove_list:
                 print(f"\t-- {create_file_name(d['name'], d['pushed_at'])}")
 
-            remove_old_files = input('You have newer files in the repo. Would you like to remove the old repo files? (y/n) ')
+            remove_old_files = input('You have newer files in your GitHub repo. Would you like to remove the old saved repo files? (y|n) ')
             if remove_old_files == 'y' or remove_old_files == 'yes':
                 remove_files(DIR, remove_list)
             print('\n')
@@ -114,4 +114,4 @@ def get_repositories(user, token, db):
                 download_repo(d.get('owner'), user, d['name'], token, d['default_branch'], f_path)
             print('Finished Downloading!')
     else:
-        print('No changes in all repositories. Have a great day!')
+        print('No new changes in all your GitHub repositories. Have a great day!')
