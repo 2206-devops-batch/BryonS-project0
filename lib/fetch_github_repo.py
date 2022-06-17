@@ -61,21 +61,16 @@ def download_repo(owner, user, name, token, default_branch, write_path):
 def create_file_name(name, pushed_at):
      return f"{str(name).strip()}_{str(pushed_at).strip()}.zip"
 
-def remove_files(remove_list):
-    print('\n')
-    for d in remove_list:
-        print(f"\t-- {create_file_name(d['name'], d['pushed_at'])}")
-    remove_old_files = input('You have newer files in the repo. Would you like to remove the old repo files? (y/n) ')
-
-    if remove_old_files == 'y' or remove_old_files == 'yes':
+def remove_files(PATH, remove_list):
         for d in remove_list:
             file_name = create_file_name(d['name'], d['pushed_at'])
             try:
-                DIR.joinpath(file_name).unlink()
+                PATH.joinpath(file_name).unlink()
                 print(f'Removed {file_name}')
+                return True
             except:
-                print(f"Couldn't delete file {file_name}" )
-        print('\n')
+                print(f"Couldn't delete file {file_name}")
+                return False
 
 # main entry point
 def get_repositories(user, token, db):
@@ -100,7 +95,14 @@ def get_repositories(user, token, db):
     if download or remove_list:
         # ask to remove old repos?
         if remove_list:
-           remove_files(remove_list)
+            print('\n')
+            for d in remove_list:
+                print(f"\t-- {create_file_name(d['name'], d['pushed_at'])}")
+
+            remove_old_files = input('You have newer files in the repo. Would you like to remove the old repo files? (y/n) ')
+            if remove_old_files == 'y' or remove_old_files == 'yes':
+                remove_files(DIR, remove_list, remove_old_files)
+
         
         if download:
             print('Starting Download')

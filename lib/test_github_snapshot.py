@@ -4,11 +4,11 @@ import os, sys
 # added to fix relative path import problem.
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from lib.fetch_github_repo import create_file_name, filter_data, process_links
+from lib.fetch_github_repo import create_file_name, filter_data, process_links, remove_files
 from lib.github_cred import credentials
 from lib.snapshot import get_database
 
-
+# paths
 DUMMY_DIR = pathlib.Path.cwd().joinpath('unittest_dummy_data')
 
 RAW_DUMMY_GITHUB_DATA = DUMMY_DIR.joinpath('raw_dummy_github_data.json')
@@ -57,6 +57,8 @@ class TestFetchGitHub(unittest.TestCase):
         with open(DUMMY_REMOVE_DATA) as f6:
             cls.PROCESSED_REMOVE_DATA = json.load(f6)
 
+        
+
     def test_create_file_name(self):
         self.assertEqual(create_file_name(self.USER, 1234567890), f"{self.USER}_1234567890.zip")
         self.assertEqual(create_file_name(f" {self.USER} ", " 1234567890 "), f"{self.USER}_1234567890.zip")
@@ -67,12 +69,24 @@ class TestFetchGitHub(unittest.TestCase):
 
     def test_process_links(self):
         # where to write the new db dummy data.
-        DUMMY_DATA_FILE_PATH = DUMMY_DIR.joinpath('temp_new_dummy_db.json')
-
-        self.assertEqual(process_links(self.OLD_DB, self.NEW_DATA, DUMMY_DATA_FILE_PATH), (self.PROCESSED_DOWNLOAD_DATA, self.PROCESSED_REMOVE_DATA))
+        WRITE_NEW_DUMMY_DATA_PATH = DUMMY_DIR.joinpath('temp_new_dummy_db.json')
+        self.assertEqual(process_links(self.OLD_DB, self.NEW_DATA, WRITE_NEW_DUMMY_DATA_PATH), (self.PROCESSED_DOWNLOAD_DATA, self.PROCESSED_REMOVE_DATA))
+        # teardown remove test file
+        WRITE_NEW_DUMMY_DATA_PATH.unlink()
+    
+    def test_create_file_name(self):
+        TEST_STRING = f"{self.USER}DummyFile_65923450394.zip"
+        self.assertEqual(create_file_name(f"{self.USER}DummyFile", 65923450394), TEST_STRING)
+        self.assertEqual(create_file_name(f" {self.USER}DummyFile ", ' 65923450394 '), TEST_STRING)
         
-
-
+    
+    def test_remove_files(self):
+        # create dummy file to be removed.
+        TEMP_FILE_NAME = create_file_name('BryonS-project0', 1655089511.0)
+        TEMP_DUMMY_FILE = DUMMY_DIR.joinpath(TEMP_FILE_NAME)
+        TEMP_DUMMY_FILE.write_text('test')
+        self.assertEqual(remove_files(DUMMY_DIR, self.PROCESSED_REMOVE_DATA), True)
+        self.assertEqual(remove_files(DUMMY_DIR, self.PROCESSED_REMOVE_DATA), False)
 
 
 
