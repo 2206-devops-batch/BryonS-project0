@@ -2,7 +2,7 @@
 
 
 # call test on changes
-res=python $PWD/lib/test_github_snapshot.py
+python $PWD/lib/test_github_snapshot.py
 
 # if test ok, publish changes.
 if [[ $? -eq 0 ]]; then
