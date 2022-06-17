@@ -102,6 +102,7 @@ def get_repositories(user, token, db):
             remove_old_files = input('You have newer files in the repo. Would you like to remove the old repo files? (y/n) ')
             if remove_old_files == 'y' or remove_old_files == 'yes':
                 remove_files(DIR, remove_list)
+            print('\n')
 
         
         if download:

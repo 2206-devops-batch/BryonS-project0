@@ -57,8 +57,7 @@ class TestFetchGitHub(unittest.TestCase):
         with open(DUMMY_REMOVE_DATA) as f6:
             cls.PROCESSED_REMOVE_DATA = json.load(f6)
 
-        
-
+    # test methods
     def test_create_file_name(self):
         self.assertEqual(create_file_name(self.USER, 1234567890), f"{self.USER}_1234567890.zip")
         self.assertEqual(create_file_name(f" {self.USER} ", " 1234567890 "), f"{self.USER}_1234567890.zip")
@@ -87,10 +86,6 @@ class TestFetchGitHub(unittest.TestCase):
         TEMP_DUMMY_FILE.write_text('test')
         self.assertEqual(remove_files(DUMMY_DIR, self.PROCESSED_REMOVE_DATA), True)
         self.assertEqual(remove_files(DUMMY_DIR, self.PROCESSED_REMOVE_DATA), False)
-
-
-
-
 
 if __name__ == '__main__':
     unittest.main()
