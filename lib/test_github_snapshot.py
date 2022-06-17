@@ -84,8 +84,8 @@ class TestFetchGitHub(unittest.TestCase):
         TEMP_FILE_NAME = create_file_name('BryonS-project0', 1655089511.0)
         TEMP_DUMMY_FILE = DUMMY_DIR.joinpath(TEMP_FILE_NAME)
         TEMP_DUMMY_FILE.write_text('test')
-        self.assertEqual(remove_files(DUMMY_DIR, self.PROCESSED_REMOVE_DATA), True)
-        self.assertEqual(remove_files(DUMMY_DIR, self.PROCESSED_REMOVE_DATA), False)
+        self.assertTrue(remove_files(DUMMY_DIR, self.PROCESSED_REMOVE_DATA))
+        self.assertFalse(remove_files(DUMMY_DIR, self.PROCESSED_REMOVE_DATA))
 
 if __name__ == '__main__':
     unittest.main()
