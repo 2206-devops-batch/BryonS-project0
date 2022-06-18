@@ -16,6 +16,7 @@ def get_dependencies():
                     print('\n')
                 except:
                     print("Look\'s like I don\'t have permissions.\n You can install them manually:\npip install -r 'requirements.txt'\n")
+                    return False
             else:
                 print("\nOK, so you want to do it the hard way! :-)\npip install -r 'requirements.txt'\n")
                 return False

@@ -11,7 +11,7 @@ def isFileExist(dir, filename):
 
 def env(USER='', TOKEN=''):
     if not isFileExist(DIR, '.env'):
-        makeEnv = input('I can store your Github credentials in a secret ".env" file, so you don\'t have to add them every time.\n Would you like me to create one for you? (y|n) ')
+        makeEnv = input('GitHub needs you to be "authorized" to get your private repos.\nI can store your Github credentials in a secret ".env" file, so you don\'t have to add them every time.\n Would you like me to create one for you? (y|n) ')
         print('\n')
         if makeEnv == 'y' or makeEnv == 'yes':
             USER = ''
