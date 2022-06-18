@@ -25,7 +25,7 @@ if is_dependency_met:
     # Github Login Credentials
     USER, TOKEN = github.credentials(USER, TOKEN)
 
-    # # Github Repo
-    # fetch_github_repo.get_repositories(USER, TOKEN, db)
+    # Github Repo
+    fetch_github_repo.get_repositories(USER, TOKEN, db)
 
-    # print('Done!')
+    print('Done!')
