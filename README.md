@@ -34,7 +34,7 @@ Create a backup of all your public, private and organization Github repositories
 - Learning how to use the urllib library for HTTP request.
 - Learning to use GitHub API for automation.
 
-### Improvements
+### Future Improvements
 
 - Allow for more than 100 repositories to be downloaded.
 - Add download bar percentage to console.
