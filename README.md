@@ -6,11 +6,6 @@
 
 ## GitHub Snapshot
 
-### Dependencies
-
-- python-dotenv 0.20.0
-- requests 2.28.0
-
 ### Instructions
 
 - Clone repository
