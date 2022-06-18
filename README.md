@@ -10,8 +10,8 @@
 
 - Clone repository
 - Install dependencies
-  - pip install -r 'requirements.txt'
-- Run: 'python main.py' from the terminal
+  - `pip install -r 'requirements.txt'`
+- Run: `'python main.py'` from the terminal
 
 ### Purpose
 
