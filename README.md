@@ -14,11 +14,7 @@
 
 - Clone repository
 - Install dependencies
-  - python3 -m pip3 install python-dotenv requests
-- Create .env file in root directory (inside BryonS-project0 folder)
-  - USER=your_github_username
-  - TOKEN=your_github_token
-    - The token can be created from GitHub: Settings / Developer Settings / Personal access tokens
+  - pip install -r 'requirements.txt'
 - Run: 'python main.py' from the terminal
 
 ### Purpose
