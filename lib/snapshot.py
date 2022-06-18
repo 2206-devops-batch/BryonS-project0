@@ -1,8 +1,8 @@
 import pathlib, json
 
-
-DIR =  pathlib.Path.cwd().joinpath('snapshot')
-GITHUB_DB_FILE_PATH = DIR.joinpath('github_data.json')
+DIR = pathlib.Path.cwd()
+SNAPSHOT_DIR =  DIR.joinpath('snapshot')
+GITHUB_DB_FILE_PATH = SNAPSHOT_DIR.joinpath('github_data.json')
 
 # if file does not exist, create it.
 def read_file(path):

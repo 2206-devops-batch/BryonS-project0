@@ -1,6 +1,6 @@
 import requests, json, pathlib 
 from datetime import datetime
-from lib.snapshot import DIR, GITHUB_DB_FILE_PATH
+from lib.snapshot import SNAPSHOT_DIR, GITHUB_DB_FILE_PATH
 
 
 def filter_data(data):
@@ -101,7 +101,7 @@ def get_repositories(user, token, db):
 
             remove_old_files = input('You have newer files in your GitHub repo. Would you like to remove the old saved repo files? (y|n) ')
             if remove_old_files == 'y' or remove_old_files == 'yes':
-                remove_files(DIR, remove_list)
+                remove_files(SNAPSHOT_DIR, remove_list)
             print('\n')
 
         
@@ -109,7 +109,7 @@ def get_repositories(user, token, db):
             print('Starting Download')
             for d in download:
                 file_name = create_file_name(d['name'], d['pushed_at'])
-                f_path = DIR.joinpath(file_name)
+                f_path = SNAPSHOT_DIR.joinpath(file_name)
                 print(f'Downloading: {file_name}')
                 download_repo(d.get('owner'), user, d['name'], token, d['default_branch'], f_path)
             print('Finished Downloading!')
