@@ -1,7 +1,8 @@
 # BryonS-project0
 
-**Revature DevOps Project0 -Python Application 2206-devops-batch**
-**Instructor Nick E.**
+**Create a backup of all your public, private and organization Github repositories.**
+
+**2206-devops-batch -DevOps Project0 -Python Application**
 
 ## GitHub Snapshot
 
