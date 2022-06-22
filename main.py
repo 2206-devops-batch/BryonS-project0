@@ -1,6 +1,6 @@
 #!/c/Python310/python
 
-from lib.check_dependency import get_dependencies 
+from lib.check_dependency import get_dependencies
 
 #check if dependency packages are installed
 is_dependency_met = get_dependencies()
