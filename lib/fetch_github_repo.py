@@ -59,7 +59,7 @@ def download_repo(owner, user, name, token, default_branch, write_path):
         b.write(res.content)
 
 def create_file_name(name, pushed_at):
-     return f"{str(name).strip()}_{str(pushed_at).strip()}.zip"
+     return "{}_{}.zip".format(str(name).strip(), str(pushed_at).strip())
 
 def remove_files(PATH, remove_list):
         for d in remove_list:
@@ -97,7 +97,7 @@ def get_repositories(user, token, db):
         if remove_list:
             print('\n')
             for d in remove_list:
-                print(f"\t-- {create_file_name(d['name'], d['pushed_at'])}")
+                print("\t-- {}".format(create_file_name(d['name'], d['pushed_at'])))
 
             remove_old_files = input('You have newer files in your GitHub repo. Would you like to remove the old saved repo files? (y|n) ')
             if remove_old_files == 'y' or remove_old_files == 'yes':

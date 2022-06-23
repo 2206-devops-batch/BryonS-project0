@@ -61,9 +61,9 @@ class TestFetchGitHub(unittest.TestCase):
 
     # test methods
     def test_create_file_name(self):
-        self.assertEqual(create_file_name(self.USER, 1234567890), f"{self.USER}_1234567890.zip")
-        self.assertEqual(create_file_name(f" {self.USER} ", " 1234567890 "), f"{self.USER}_1234567890.zip")
-        self.assertEqual(create_file_name(f"{self.USER} ", 1234567890.009), f"{self.USER}_1234567890.009.zip")
+        self.assertEqual(create_file_name(self.USER, 1234567890), "{}_1234567890.zip".format(self.USER))
+        self.assertEqual(create_file_name(" {} ", " 1234567890 ".format(self.USER)), "{}_1234567890.zip".format(self.USER))
+        self.assertEqual(create_file_name("{} ".format(self.USER), 1234567890.009), "{}_1234567890.009.zip".format(self.USER))
 
     def test_filter_data(self):
         self.assertEqual(filter_data(self.RAW_GITHUB_DATA), self.PROCESSED_RAW_GITHUB_DATA)
@@ -76,9 +76,9 @@ class TestFetchGitHub(unittest.TestCase):
         WRITE_NEW_DUMMY_DATA_PATH.unlink()
     
     def test_create_file_name(self):
-        TEST_STRING = f"{self.USER}DummyFile_65923450394.zip"
-        self.assertEqual(create_file_name(f"{self.USER}DummyFile", 65923450394), TEST_STRING)
-        self.assertEqual(create_file_name(f" {self.USER}DummyFile ", ' 65923450394 '), TEST_STRING)
+        TEST_STRING = "{}DummyFile_65923450394.zip".format(self.USER)
+        self.assertEqual(create_file_name("{}DummyFile".format(self.USER), 65923450394), TEST_STRING)
+        self.assertEqual(create_file_name(" {}DummyFile ".format(self.USER), ' 65923450394 '), TEST_STRING)
 
     def test_remove_files(self):
         # create dummy file to be removed.
