@@ -12,7 +12,7 @@ def get_dependencies():
             is_install_pkg = input('I couldn\'t find the needed dependencies.\nWould you like me to install them? (y|n) ')
             if is_install_pkg == 'y' or is_install_pkg == 'yes':
                 try:
-                    subprocess.run(['pip', 'install', '--user', '-r', f'{DIR}/requirements.txt'])
+                    subprocess.run(['pip', 'install', '--user', '-r', '{}/requirements.txt'.format(DIR)])
                     print('\n')
                 except:
                     print("Look\'s like I don\'t have permissions.\n You can install them manually:\npip install -r 'requirements.txt'\n")

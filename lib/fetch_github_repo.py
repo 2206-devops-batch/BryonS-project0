@@ -45,14 +45,14 @@ def process_links(db, data, FILE_WRITE_PATH):
                         remove_list.append(old_data)
                         download.append(new_data)
 
-    print(f'You have {len(new_database)} repositories.')
+    print('You have {} repositories.'.format(len(new_database)))
     FILE_WRITE_PATH.write_text(json.dumps(new_database))
     return (download, remove_list)
 
 
 
 def download_repo(owner, user, name, token, default_branch, write_path):
-    URL = f'https://github.com/{owner}/{name}/archive/refs/heads/{default_branch}.zip'
+    URL = 'https://github.com/{}/{}/archive/refs/heads/{}.zip'.format(owner, name, default_branch)
     headers = {'Accept': 'application/vnd.github.v3+json'}
     res = requests.get(URL, auth=(user, token), headers = headers)
     with open(write_path, 'wb') as b:
@@ -66,9 +66,9 @@ def remove_files(PATH, remove_list):
             file_name = create_file_name(d['name'], d['pushed_at'])
             try:
                 PATH.joinpath(file_name).unlink()
-                print(f'Removed {file_name}')
+                print('Removed {}'.format(file_name))
             except:
-                print(f"Couldn't delete file {file_name}")
+                print("Couldn't delete file {}".format(file_name))
                 return False
         return True
 
@@ -81,7 +81,7 @@ def get_repositories(user, token, db):
     code = res.status_code
    
     if code > 304:
-        print(f'Request failed with code: {code}')
+        print('Request failed with code: {}'.format(code))
         return
 
     data = res.json()
@@ -110,7 +110,7 @@ def get_repositories(user, token, db):
             for d in download:
                 file_name = create_file_name(d['name'], d['pushed_at'])
                 f_path = SNAPSHOT_DIR.joinpath(file_name)
-                print(f'Downloading: {file_name}')
+                print('Downloading: {}'.format(file_name))
                 download_repo(d.get('owner'), user, d['name'], token, d['default_branch'], f_path)
             print('Finished Downloading!')
     else:
