@@ -18,12 +18,12 @@ def env(USER='', TOKEN=''):
             TOKEN = ''
             USER, TOKEN = getUserToken(USER, TOKEN)
             n='\n'
-            DIR.joinpath('.env').write_text(f"USER={USER}{n}TOKEN={TOKEN}")
+            DIR.joinpath('.env').write_text("USER={}{}TOKEN={}".format(USER, n,TOKEN))
             print('\n')
             # check if .gitignore exist
             if not isFileExist(DIR, '.gitignore'):
                 # create it
-                DIR.joinpath('.gitignore').write_text(f"__pycache__\nsnapshot\nvenv\n.env")
+                DIR.joinpath('.gitignore').write_text("__pycache__\nsnapshot\nvenv\n.env")
                 print('Ok great! I created a ".gitignore" file for you and added .env to it.\nYour secrets are safe with me. :-)')
                 print('\n')
             else:
